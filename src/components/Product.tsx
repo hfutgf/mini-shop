@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import favourite from "assets/svg/favourite.svg";
 import basket from "assets/svg/basket.svg";
 import { Link } from "react-router-dom";
 
@@ -20,7 +21,7 @@ const Product: FC<ProductProps> = ({ image, title, price, id }) => {
           src={image}
           width={212}
           height={212}
-          className="rounded-[8px] w-[212px] h-[250px]"
+          className="rounded-[8px] w-[212px] h-[212px]"
           alt="img"
         />
       </div>
@@ -28,8 +29,11 @@ const Product: FC<ProductProps> = ({ image, title, price, id }) => {
         <h3 className="h-[48px] font-[500]">
           {title.length < 32 ? title : title.slice(0, 32) + "..."}
         </h3>
-        <div className=" flex items-center justify-between">
+        <div className=" flex items-center justify-between mt-[24px] text-[16px] font-[500]">
           <span>{price} $</span>
+          <button className="py-[2px] px-[4px] rounded-[8px] border-[1px] border-solid w-[35px]">
+            <img src={favourite} alt="basket" width={24} height={24} />
+          </button>
           <button className="py-[2px] px-[4px] rounded-[8px] border-[1px] border-solid w-[35px]">
             <img src={basket} alt="basket" width={24} height={24} />
           </button>

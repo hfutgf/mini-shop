@@ -2,6 +2,7 @@ import { create } from "zustand";
 
 export const useStore = create((set) => ({
   products: [],
+  categoryProducts: [],
 
   setProducts: (payload: IProduct[]) =>
     set(() => {
@@ -9,4 +10,11 @@ export const useStore = create((set) => ({
         products: [...payload],
       };
     }),
+  setProductsByCategory: (payload: IProduct[]) => {
+    set(() => {
+      return {
+        categoryProducts: [...payload],
+      };
+    });
+  },
 }));

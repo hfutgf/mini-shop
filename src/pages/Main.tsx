@@ -5,16 +5,20 @@ import { useStore } from "store/index";
 
 const Main = () => {
   const [categories, setCategories] = useState<string[] | null>(null);
-  const { products, setProducts } = useStore((state: any) => state);
+  const { products, categoryProducts, setProductsByCategory } = useStore(
+    (state: any) => state
+  );
   const [changeCategory, setChangeCategory] = useState<string>("");
-
-  useEffect(() => {
-    // getProductOnCategory(changeCategory).then((res) => setCategories(res));
-  }, [changeCategory]);
 
   useEffect(() => {
     getCategories().then((res) => setCategories(res));
   }, []);
+
+  useEffect(() => {
+    getProductOnCategory(changeCategory).then((res) =>
+      setProductsByCategory(res)
+    );
+  }, [changeCategory]);
 
   return (
     <div className="min-h-screen bg-light my-[32px]">
@@ -35,15 +39,25 @@ const Main = () => {
           </div>
         </div>
         <div className="flex items-center justify-center flex-wrap gap-[24px] mt-[32px]">
-          {products?.map((product: IProduct) => (
-            <Product
-              key={product.id}
-              id={product.id}
-              image={product.image}
-              price={product.price}
-              title={product.title}
-            />
-          ))}
+          {categoryProducts.length
+            ? categoryProducts?.map((product: IProduct) => (
+                <Product
+                  key={product.id}
+                  id={product.id}
+                  image={product.image}
+                  price={product.price}
+                  title={product.title}
+                />
+              ))
+            : products?.map((product: IProduct) => (
+                <Product
+                  key={product.id}
+                  id={product.id}
+                  image={product.image}
+                  price={product.price}
+                  title={product.title}
+                />
+              ))}
         </div>
       </div>
     </div>

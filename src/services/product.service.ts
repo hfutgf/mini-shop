@@ -22,7 +22,8 @@ export const getProduct = async (id: number): Promise<IProduct> => {
 export const getProductOnCategory = async (
   category: string
 ): Promise<IProduct[]> => {
+  // console.log(category)
   const res = await $product.get(`/products/category/${category}`);
-  console.log(res)
+  // console.log(res)
   return res?.data;
 };
